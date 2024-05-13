@@ -65,8 +65,15 @@ const deleteCompleted = () => {
     state.todos = state.todos.filter(todo => !todo.done);
 }
 
+/**
+ * 
+ * @param {Filter} newFilter 
+ */
 const setSelectedFilter = (newFilter = Filter.All) => {
-    throw new Error('Not implemented');
+    if (!Object.values(Filter).includes(newFilter)) {
+        throw new Error(`Option ${newFilter} is not valid.`);
+    }
+    state.filter = newFilter;
 }
 
 const getCurrentFilter = () => {
