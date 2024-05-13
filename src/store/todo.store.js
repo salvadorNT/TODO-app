@@ -23,6 +23,19 @@ const loadStore = () => {
     throw new Error('Not implemented');
 }
 
+const getTodos = (filter = Filter.All) => {
+    switch (filter) {
+        case Filter.All:
+            return state.todos;
+        case Filter.Completed:
+            return state.todos.filter(todo => todo.done);
+        case Filter.Pending:
+            return state.todos.filter(todo => !todo.done);
+        default:
+            throw new Error(`Option ${filter} is not valid.`);
+    }
+}
+
 /**
  * 
  * @param {String} description 
@@ -68,4 +81,5 @@ export default {
     loadStore,
     setSelectedFilter,
     toggleTodo,
+    getTodos,
 }
