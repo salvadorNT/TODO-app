@@ -5,6 +5,7 @@ import { renderTodos } from "./use-cases";
 
 const ElementIDs = {
     TodosList: '.todo-list',
+    NewTodoInput: '#new-todo-input',
 }
 
 /**
@@ -28,6 +29,18 @@ export const App = (elementId) => {
         displayTodos();
     })();
 
+    // References
+    const newDescriptionInput = document.querySelector(ElementIDs.NewTodoInput);
+
+    // Listener
+    newDescriptionInput.addEventListener('keyup', (event) => {
+        if (event.code!=='Enter' ) return;
+        if (event.target.value.trim().length === 0) return;
+
+        todoStore.addTodo(event.target.value);
+        displayTodos();
+        newDescriptionInput.value=''
+    })
 
 
 }
