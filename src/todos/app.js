@@ -50,6 +50,10 @@ export const App = (elementId) => {
             todoStore.toggleTodo(todoId);
             displayTodos();
         }
+        else{
+            todoStore.deleteTodo(todoId);
+            displayTodos();
+        }
     })
 
 }
