@@ -82,7 +82,7 @@ const setSelectedFilter = (newFilter = Filter.All) => {
 }
 
 const getCurrentFilter = () => {
-    throw new Error('Not implemented');
+    return state.filter;
 }
 
 export default {
