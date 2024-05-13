@@ -62,7 +62,7 @@ const deleteTodo = (todoId) => {
 }
 
 const deleteCompleted = () => {
-    throw new Error('Not implemented');
+    state.todos = state.todos.filter(todo => !todo.done);
 }
 
 const setSelectedFilter = (newFilter = Filter.All) => {
