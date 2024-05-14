@@ -23,6 +23,7 @@ export const App = (elementId) => {
 
 
     (() => {
+        todoStore.initStore();
         const app = document.createElement('div');
         app.innerHTML = html;
         document.querySelector(elementId).append(app);
@@ -35,22 +36,22 @@ export const App = (elementId) => {
 
     // Listener
     newDescriptionInput.addEventListener('keyup', (event) => {
-        if (event.code!=='Enter' ) return;
+        if (event.code !== 'Enter') return;
         if (event.target.value.trim().length === 0) return;
 
         todoStore.addTodo(event.target.value);
         displayTodos();
-        newDescriptionInput.value='';
+        newDescriptionInput.value = '';
     });
 
     todoListUL.addEventListener('click', (ev) => {
         const element = ev.target.closest('[data-id]');
         let todoId = element.getAttribute('data-id');
-        if(ev.target.tagName !== 'BUTTON'){
+        if (ev.target.tagName !== 'BUTTON') {
             todoStore.toggleTodo(todoId);
             displayTodos();
         }
-        else{
+        else {
             todoStore.deleteTodo(todoId);
             displayTodos();
         }

@@ -18,12 +18,16 @@ const state = {
 }
 
 const initStore = () => {
-    console.log(state);
+    loadStore();
     console.log('Init store 🥑');
 }
 
 const loadStore = () => {
-    throw new Error('Not implemented');
+    if (!localStorage.getItem('state')) console.log('no hay nada guardado');;
+
+    const { todos = [], filter = Filter.All } = JSON.parse(localStorage.getItem('state'));
+    state.todos = todos;
+    state.filter = filter;
 }
 
 const saveStateToLocalStorage = () => {
