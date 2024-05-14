@@ -6,7 +6,8 @@ import { renderTodos } from "./use-cases";
 const ElementIDs = {
     TodosList: '.todo-list',
     NewTodoInput: '#new-todo-input',
-    ClearCompleted: '.clear-completed'
+    ClearCompleted: '.clear-completed',
+    TodoFilters: '.filtro',
 }
 
 /**
@@ -35,6 +36,7 @@ export const App = (elementId) => {
     const newDescriptionInput = document.querySelector(ElementIDs.NewTodoInput);
     const todoListUL = document.querySelector(ElementIDs.TodosList);
     const clearCompletedButton = document.querySelector(ElementIDs.ClearCompleted);
+    const filtersUL = document.querySelectorAll(ElementIDs.TodoFilters);
 
     // Listener
     newDescriptionInput.addEventListener('keyup', (event) => {
@@ -64,7 +66,32 @@ export const App = (elementId) => {
         displayTodos();
     });
 
+    filtersUL.forEach(element => {
+        console.log('Me ejecuto');
+        element.addEventListener('click', (element) => {
+            filtersUL.forEach(el => el.classList.remove('selected'));
+            element.target.classList.add('selected');
 
+            console.log(element.target.text);
+            switch (element.target.text) {
+                case 'Todos':
+                    todoStore.setSelectedFilter(Filter.All);
+                    todoStore.getTodos(Filter.All);
+                    break;
+                case 'Pendientes':
+                    todoStore.setSelectedFilter(Filter.Pending);
+                    todoStore.getTodos(Filter.Pending);
+                    break;
+                case 'Completados':
+                    todoStore.setSelectedFilter(Filter.Completed);
+                    todoStore.getTodos(Filter.Completed);
+                    break;
+                default:
+                    break;
+            }
+            displayTodos();
+        });
+    });
 
 
 }
