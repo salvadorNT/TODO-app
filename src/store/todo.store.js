@@ -6,14 +6,7 @@ export const Filter = {
     Pending: 'Pending'
 }
 const state = {
-    todos: [
-        new Todo('Piedra del alma'),
-        new Todo('Piedra del tiempo'),
-        new Todo('Piedra del espacio'),
-        new Todo('Piedra del mente'),
-        new Todo('Piedra del realidad'),
-        new Todo('Piedra del poder')
-    ],
+    todos: [],
     filter: Filter.All,
 }
 
@@ -25,7 +18,7 @@ const initStore = () => {
 const loadStore = () => {
     if (!localStorage.getItem('state')) console.log('no hay nada guardado');;
 
-    const { todos = [], filter = Filter.All } = JSON.parse(localStorage.getItem('state'));
+    const { todos = [], filter = Filter.All } = JSON.parse(localStorage.getItem('state')) || '';
     state.todos = todos;
     state.filter = filter;
 }
