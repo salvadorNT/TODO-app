@@ -1,6 +1,6 @@
 import html from "./app.html?raw";
 import todoStore, { Filter } from "../store/todo.store";
-import { renderTodos } from "./use-cases";
+import { renderPending, renderTodos } from "./use-cases";
 
 
 const ElementIDs = {
@@ -8,6 +8,7 @@ const ElementIDs = {
     NewTodoInput: '#new-todo-input',
     ClearCompleted: '.clear-completed',
     TodoFilters: '.filtro',
+    PendingCount: '#pending-count',
 }
 
 /**
@@ -20,6 +21,7 @@ export const App = (elementId) => {
     const displayTodos = () => {
         const todos = todoStore.getTodos(todoStore.getCurrentFilter());
         renderTodos(ElementIDs.TodosList, todos);
+        renderPending(ElementIDs.PendingCount);
 
     }
 
@@ -67,12 +69,11 @@ export const App = (elementId) => {
     });
 
     filtersUL.forEach(element => {
-        console.log('Me ejecuto');
+
         element.addEventListener('click', (element) => {
             filtersUL.forEach(el => el.classList.remove('selected'));
+            
             element.target.classList.add('selected');
-
-            console.log(element.target.text);
             switch (element.target.text) {
                 case 'Todos':
                     todoStore.setSelectedFilter(Filter.All);
