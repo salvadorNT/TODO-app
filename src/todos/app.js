@@ -42,7 +42,7 @@ export const App = (elementId) => {
 
     // Listener
     newDescriptionInput.addEventListener('keyup', (event) => {
-        if (event.code !== 'Enter') return;
+        if (event.keyCode !== 13) return;
         if (event.target.value.trim().length === 0) return;
 
         todoStore.addTodo(event.target.value);
